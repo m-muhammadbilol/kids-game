@@ -1,4 +1,4 @@
-import { elBox, elCorrect, elMathProblem, elwrong } from "./elements.js"
+import { elBox, elCorrect, elMathProblem, elScore, elwrong } from "./elements.js"
 
 function random(point = 1){
     return Math.trunc(Math.random() * point)
@@ -56,17 +56,22 @@ ui(results(result) , display)
 
 
 
-
+function countScore() {
+    const scoree = elScore.innerText
+    return scoree + 1
+}
 
 elBox.addEventListener("click" , (evt) => {
     if(evt.target.classList.contains("span")){
         if(evt.target.innerText == result ){
             evt.target.innerText = "✅"
+            countScore()
             elCorrect.play()
             setTimeout(()=>{
                 const {display , result} = changeActios()
                 ui(results(result) , display)
             } , 500)
+
         }else{
             evt.target.innerText = "❌"
             elwrong.play()
